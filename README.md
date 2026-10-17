@@ -58,7 +58,7 @@ The workflow is documented in `BUSA8001_SheCodes.ipynb`.
 | Tuned XGBoost | **0.25** |
 
 - **Selected model:** XGBoost Regressor.
-- **Recorded leaderboard position:** Rank 11, as documented in the notebook; final ranking is not independently verified.
+- **Recorded leaderboard position:** Rank 14, as documented in the notebook; final ranking is not independently verified.
 - **Prediction output:** `submission_XGB_Shecodes.csv`.
 
 **Metric note:** These cross-validation scores are errors in `log(1 + price)`, not AUD. They should not be interpreted as dollar prediction errors.
@@ -80,7 +80,6 @@ The workflow is documented in `BUSA8001_SheCodes.ipynb`.
 
 3. Open the notebook in Jupyter and run the cells in order.
 
-Source datasets are not included with this README. Reproduction requires authorised access to the original competition data. Results above are taken from saved notebook outputs; the notebook has not been rerun for this portfolio description.
 
 ## 📝 Limitations & Future Improvements
 
