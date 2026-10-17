@@ -2,7 +2,7 @@
 
 ## 📌 Project Overview
 
-A machine learning project predicting Airbnb listing prices in Melbourne using property, location and host features. Developed for the BUSA8001 Kaggle competition at Macquarie University.
+A machine learning project predicting Airbnb listing prices in Melbourne using property, location and host features. 
 
 ### Business Relevance
 
