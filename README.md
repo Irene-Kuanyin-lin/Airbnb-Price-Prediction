@@ -25,7 +25,7 @@ Python · pandas · NumPy · Matplotlib · seaborn · SciPy · scikit-learn · X
 
 ## 🔎 Project Workflow
 
-The workflow is documented in `BUSA8001_SheCodes.ipynb`.
+The workflow is documented in `BUSA8001_SheCodes.ipynb`[View Airbnb Price Prediction (Jupyter Notebook)](BUSA8001_SheCodes.ipynb)
 
 ### 1. Exploratory Data Analysis(EDA)
 
