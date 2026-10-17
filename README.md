@@ -58,7 +58,8 @@ The workflow is documented in `BUSA8001_SheCodes.ipynb`.
 | Tuned XGBoost | **0.25** |
 
 - **Selected model:** XGBoost Regressor.
-- **Recorded leaderboard position:** Rank 14, as documented in the notebook; final ranking is not independently verified.
+- **Recorded leaderboard position:** Rank 14, as documented in the notebook
+![Airbnb Price Prediction Results](185930.png)
 - **Prediction output:** `submission_XGB_Shecodes.csv`.
 
 **Metric note:** These cross-validation scores are errors in `log(1 + price)`, not AUD. They should not be interpreted as dollar prediction errors.
