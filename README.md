@@ -1,38 +1,87 @@
-# Airbnb-Price-Prediction
-house price prediction
-📌 Project Overview
-This project focuses on building a machine learning model to predict the price of Airbnb listings in Melbourne based on property and host features. The model was trained on historical data and applied to unseen listings, with the aim of achieving high predictive accuracy.
+# Airbnb Melbourne Price Prediction
 
-Business Relevance (Stakeholders)
-Hosts: Set competitive, data-driven prices and avoid revenue loss from underpricing or booking loss from overpricing
-Guests: Compare predicted fair prices against listings to make better booking decisions
-Platforms: Enhance pricing systems with more transparent, accurate, and explainable algorithms
-📂 Dataset
-The project was built on structured Airbnb listing data provided in two files:
+## 📌 Project Overview
 
-train.csv: 7,000 rows × 61 columns (includes target variable: price)
-test.csv: 3,000 rows × 60 columns (excludes target variable: price)
-🔎 Project Workflow
-1. Exploratory Data Analysis (EDA)
-Part 1_EDA.ipynb
+A machine learning project predicting Airbnb listing prices in Melbourne using property, location and host features. Developed for the BUSA8001 Kaggle competition at Macquarie University.
 
-Explored property, host, and location features to understand data distribution
-Identified outliers and highlighted correlations between variables and price
-Built early insights into which factors (e.g., location, amenities, host behavior) drive price differences
-2. Data Processing & Feature Engineering
-Part 2_Data Processing.ipynb
+### Business Relevance
 
-The dataset contained inconsistent formats, missing values, and categorical variables with many rare categories To prepare it for predictive modeling, this part focused on:
+- **Hosts:** Compare estimated prices to inform pricing decisions.
+- **Guests:** Assess how listing characteristics relate to price.
+- **Platforms:** Explore data-driven approaches to price estimation.
 
-Standardization: Converting messy numerical and text data (e.g., prices, response rates, bathroom counts) into structured numeric formats
-Missing value strategies: Applying context-driven imputation for text, categorical, and numerical features to preserve dataset integrity
-Feature engineering: Transforming complex attributes (amenities, neighbourhoods, property types) into interpretable features that capture real business meaning
-Noise reduction: Grouping rare categories into "Other" to simplify models and improve generalization
-Why this matters: A strong data pipeline ensures the model learns from reliable, consistent, and business-relevant variables, which has a greater impact on accuracy than algorithm choice alone.
+## 📂 Dataset
 
-3. Predictive Modeling
-Part 3_Predicting.ipynb
+The competition provided two datasets:
 
-Trained four predictive models: Ridge, Lasso, SVR, and LightGBM
-Built a stacked ensemble combining these models to reduce error and capture complementary strengths
-Used Optuna for hyperparameter tuning, balancing accuracy with generalization
+- **train.csv:** 7,000 listings, including the target variable `price`.
+- **test.csv:** 3,000 listings, without target prices.
+
+Features cover property capacity, room type, location, amenities, host information, reviews and availability.
+
+## 🛠️ Tools
+
+Python · pandas · NumPy · Matplotlib · seaborn · SciPy · scikit-learn · XGBoost · SHAP
+
+## 🔎 Project Workflow
+
+The workflow is documented in `BUSA8001_SheCodes.ipynb`.
+
+### 1. Exploratory Data Analysis(EDA)
+
+- Examined distributions, missing values and unusual listing prices.
+- Explored relationships between listing characteristics and log-transformed price.
+- Identified pricing patterns associated with capacity, room type and location.
+
+### 2. Data Processing & Feature Engineering
+
+- **Standardisation:** Converted mixed-format numeric fields into usable numerical values.
+- **Missing values:** Applied numerical, categorical and date-specific imputation, including location-based KNN for missing neighbourhoods.
+- **Feature engineering:** Created host tenure ranks, bathroom counts and privacy flags, review intervals, amenity indicators and verification scores.
+- **Encoding:** Encoded categorical and Boolean variables, grouping infrequent location categories.
+- **Target preparation:** Excluded training prices of AUD 20,000 or above and applied `log1p(price)` to reduce skewness.
+
+### 3. Predictive Modelling
+
+- Compared **Linear Regression, Random Forest and XGBoost**.
+- Tuned tree-based models using **RandomizedSearchCV** and five-fold cross-validation.
+- Selected XGBoost based on the lowest recorded cross-validated MAE.
+- Used **SHAP** to interpret feature contributions.
+- Converted predictions back to the original price scale and exported a Kaggle submission.
+
+## 🏆 Results
+
+| Model | Cross-validated MAE — log-price scale |
+| --- | ---: |
+| Linear Regression | 0.30 |
+| Tuned Random Forest | 0.27 |
+| Tuned XGBoost | **0.25** |
+
+- **Selected model:** XGBoost Regressor.
+- **Recorded leaderboard position:** Rank 11, as documented in the notebook; final ranking is not independently verified.
+- **Prediction output:** `submission_XGB_Shecodes.csv`.
+
+**Metric note:** These cross-validation scores are errors in `log(1 + price)`, not AUD. They should not be interpreted as dollar prediction errors.
+
+## 💡 Key Takeaways
+
+- **Data preparation matters:** Mixed formats, missing values and complex attributes required substantial processing before modelling.
+- **Training fit is not enough:** Cross-validation provided a more useful basis for model comparison than training scores alone.
+- **Interpretability adds context:** SHAP helped explain how listing characteristics influenced predictions.
+
+## ▶️ How to Run
+
+1. Place the notebook alongside the original `train.csv` and `test.csv` files.
+2. Install dependencies:
+
+   ```bash
+   pip install jupyter pandas numpy matplotlib seaborn scipy scikit-learn xgboost shap
+   ```
+
+3. Open the notebook in Jupyter and run the cells in order.
+
+Source datasets are not included with this README. Reproduction requires authorised access to the original competition data. Results above are taken from saved notebook outputs; the notebook has not been rerun for this portfolio description.
+
+## 📝 Limitations & Future Improvements
+
+Preprocessing and price-based amenity selection were performed before cross-validation. Fitting these steps within each training fold would reduce leakage risk. An independent holdout and original-price MAE evaluation would provide stronger evidence of generalisation and alignment with the competition metric.
